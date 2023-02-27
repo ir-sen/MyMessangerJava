@@ -16,6 +16,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildscript {
+        repositories {
+            google()  // Google's Maven repository
+            mavenCentral()  // Maven Central repository
+
+        }
+
+        dependencies {
+            // Add the dependency for the Google services Gradle plugin
+            classpath 'com.google.gms:google-services:4.3.5'
+        }
+
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +41,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    apply plugin: 'com.google.gms.google-services'
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
 }
 
 dependencies {
@@ -36,4 +59,35 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
+
+    implementation 'com.facebook.android:facebook-android-sdk:12.1.0'
+
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    implementation 'com.google.firebase:firebase-auth'
+
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+
+
+
+
+
+
+
+
+    // firebase
 }
