@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "393892116220",
+    "project_id": "mymessangerjava",
+    "storage_bucket": "mymessangerjava.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393892116220:android:dada654129accf64a90979",
+        "android_client_info": {
+          "package_name": "com.kis.mymessangerjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393892116220-f992eauu5uhm50i62a9273b9qp94l664.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbbBJb4Z0M7GQ05I9xumQn9qI-aIfmey8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393892116220-f992eauu5uhm50i62a9273b9qp94l664.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
