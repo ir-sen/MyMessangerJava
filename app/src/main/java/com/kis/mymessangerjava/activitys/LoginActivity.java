@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,8 +95,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
+    public Intent newIntent(Context context) {
+        return new Intent(context, LoginActivity.class);
+    }
 
 
 }
