@@ -1,4 +1,4 @@
-package com.kis.mymessangerjava;
+package com.kis.mymessangerjava.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,23 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class RegisterActivity extends AppCompatActivity {
+import com.kis.mymessangerjava.R;
 
-    private final String TAG = "ActivityResult";
-
+public class UsersActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
+        setContentView(R.layout.activity_users);
     }
-
 
     public Intent newIntent(Context context) {
-        return new Intent(context, RegisterActivity.class);
+        return new Intent(context, UsersActivity.class);
     }
-
 
 
 }

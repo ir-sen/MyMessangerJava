@@ -28,18 +28,19 @@ public class SingInViewModel extends AndroidViewModel {
 
 
 
-    private void singIn(String email, String password) {
+    public void singIn(String email, String password) {
+        mAuth = FirebaseAuth.getInstance();
 
-
-
-        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-
-            }
-        }).addOnFailureListener(Throwable::printStackTrace);
-
-        mAuth.createUserWithEmailAndPassword("irsen.kan@mail.com", "234341").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+//            @Override
+//            public void onSuccess(AuthResult authResult) {
+//
+//            }
+//        }).addOnFailureListener(Throwable::printStackTrace);
+//        my account
+//        irsen.kan@mail.com
+//        234341
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 FirebaseUser currentUser = mAuth.getCurrentUser();
