@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginViewModel extends ViewModel {
+public class RegistrationViewModel extends ViewModel {
 
     private FirebaseAuth auth;
 
@@ -31,7 +29,9 @@ public class LoginViewModel extends ViewModel {
         return auth;
     }
 
-    public LoginViewModel() {
+
+    public RegistrationViewModel() {
+
         auth = FirebaseAuth.getInstance();
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
@@ -41,19 +41,17 @@ public class LoginViewModel extends ViewModel {
                 }
             }
         });
+
     }
 
-
-
-
-
-    public void login(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+    public void signUp(
+            String email,
+            String password,
+            String name,
+            String lastName,
+            int age
+    ) {
+        auth.createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 error.setValue(e.getMessage());
