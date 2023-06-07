@@ -4,20 +4,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.kis.mymessangerjava.Pojo.User;
 import com.kis.mymessangerjava.R;
 import com.kis.mymessangerjava.view_models.UsersViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class UsersActivity extends AppCompatActivity {
 
     private UsersViewModel viewModel;
+    private RecyclerView recyclerViewUsers;
+    private UsersAdapter usersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +35,26 @@ public class UsersActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
         observeViewModel();
+
+        List<User> list = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            User user = new User(
+                    "id" +i, "name" + i,
+                    i + "lastName", i + "age", new Random().nextBoolean() );
+            list.add(user);
+        }
+        Log.d("TAGLIST", list.toString());
+        initViews();
+        usersAdapter.setUsers(list);
+
+
+
+    }
+
+    private void initViews() {
+        recyclerViewUsers = findViewById(R.id.userRecycleView);
+        usersAdapter = new UsersAdapter();
+        recyclerViewUsers.setAdapter(usersAdapter);
     }
 
     private void observeViewModel() {
