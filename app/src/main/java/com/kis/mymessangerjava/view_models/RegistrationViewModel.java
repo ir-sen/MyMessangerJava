@@ -6,12 +6,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.kis.mymessangerjava.Pojo.User;
 
 public class RegistrationViewModel extends ViewModel {
 
     private FirebaseAuth auth;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference usersReferences;
 
     private MutableLiveData<String> error = new MutableLiveData<>();
 
@@ -33,6 +40,10 @@ public class RegistrationViewModel extends ViewModel {
     public RegistrationViewModel() {
 
         auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        usersReferences = firebaseDatabase.getReference("users");
+
+
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -51,10 +62,27 @@ public class RegistrationViewModel extends ViewModel {
             String lastName,
             int age
     ) {
-        auth.createUserWithEmailAndPassword(email, password).addOnFailureListener(new OnFailureListener() {
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnFailureListener(new OnFailureListener() {
+
             @Override
             public void onFailure(@NonNull Exception e) {
                 error.setValue(e.getMessage());
+            }
+        })
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser firebaseUser = authResult.getUser();
+                    if (firebaseUser == null) { return;}
+                    User user = new User(
+                            firebaseUser.getUid(),
+                            name,
+                            lastName,
+                            age,
+                            false
+                            );
+                    usersReferences.child(user.getId()).setValue(user);
             }
         });
     }

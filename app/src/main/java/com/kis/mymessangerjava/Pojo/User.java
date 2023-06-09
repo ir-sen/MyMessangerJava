@@ -5,15 +5,18 @@ public class User {
     private String id;
     private String name;
     private String lasetName;
-    private String age;
+    private int age;
     private Boolean isOnline;
 
-    public User(String id, String name, String lasetName, String age, Boolean isOnline) {
+    public User(String id, String name, String lasetName, int age, Boolean isOnline) {
         this.id = id;
         this.name = name;
         this.lasetName = lasetName;
         this.age = age;
         this.isOnline = isOnline;
+    }
+
+    public User() {
     }
 
     public void setId(String id) {
@@ -28,7 +31,7 @@ public class User {
         this.lasetName = lasetName;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -48,11 +51,22 @@ public class User {
         return lasetName;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
     public Boolean getIsOnline() {
         return isOnline;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", lasetName='" + lasetName + '\'' +
+                ", age=" + age +
+                ", isOnline=" + isOnline +
+                '}';
     }
 }
