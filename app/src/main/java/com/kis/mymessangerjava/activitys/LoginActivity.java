@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(FirebaseUser firebaseUser) {
 //                if he authorize go to
                 if (firebaseUser != null) {
-                    Intent intent = new UsersActivity().newIntent(LoginActivity.this);
+                    Intent intent = new UsersActivity().newIntent(LoginActivity.this, firebaseUser.getUid());
                     startActivity(intent);
                     finish();
                 }

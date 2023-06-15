@@ -21,9 +21,13 @@ import java.util.List;
 
 public class UsersActivity extends AppCompatActivity {
 
+
+    private String CURRENT_USER_ID = "currentUser";
     private UsersViewModel viewModel;
     private RecyclerView recyclerViewUsers;
     private UsersAdapter usersAdapter;
+
+    private String currentUserId;
 
 
     @Override
@@ -33,6 +37,7 @@ public class UsersActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
         initViews();
+        currentUserId = getIntent().getStringExtra(CURRENT_USER_ID);
         viewModel.getUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
@@ -42,7 +47,13 @@ public class UsersActivity extends AppCompatActivity {
 
 
         observeViewModel();
-
+        usersAdapter.setOnUserClickListener(new UsersAdapter.OnUserClickListener() {
+            @Override
+            public void onUserClick(User user) {
+                Intent intent = new ChatActivity().newIntent(UsersActivity.this, currentUserId, user.getId());
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -80,8 +91,10 @@ public class UsersActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public Intent newIntent(Context context) {
-        return new Intent(context, UsersActivity.class);
+    public Intent newIntent(Context context, String currentUserId) {
+        Intent intent = new Intent(context, UsersActivity.class);
+        intent.putExtra(CURRENT_USER_ID, currentUserId);
+        return intent;
     }
 
 
