@@ -47,7 +47,7 @@ public class User {
         return name;
     }
 
-    public String getLasetName() {
+    public String getLastName() {
         return lasetName;
     }
 

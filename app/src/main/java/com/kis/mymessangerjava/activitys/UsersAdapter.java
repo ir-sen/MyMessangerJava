@@ -44,7 +44,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = users.get(position);
         String userInfo = String.format("%s %s %s",
-                user.getName(), user.getLasetName(), user.getAge()
+                user.getName(), user.getLastName(), user.getAge()
         );
         holder.textViewUserInfo.setText(userInfo);
         int bgResId;
