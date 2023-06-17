@@ -36,6 +36,10 @@ public class ChatViewModel extends ViewModel {
     private String currentUserId;
     private String otherUserId;
 
+    public void setUserOnline(boolean isOnline) {
+        messangesReference.child(currentUserId).child("isOnline").setValue(isOnline);
+    }
+
     public ChatViewModel(String currentUserId, String otherUserId, @NonNull Closeable... closeables) {
         super(closeables);
         this.currentUserId = currentUserId;

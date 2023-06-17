@@ -1,12 +1,14 @@
 package com.kis.mymessangerjava.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -119,6 +121,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onChanged(User user) {
                 String userInfo = String.format("%s, %s", user.getName(), user.getLastName());
                 title_tv.setText(userInfo);
+                int bgResId;
+                if (user.getIsOnline()) {
+                    bgResId = R.drawable.circie_green;
+                } else {
+                    bgResId = R.drawable.circie_red;
+                }
+                Drawable backgroud = ContextCompat.getDrawable(ChatActivity.this, bgResId);
+                status_view.setBackground(backgroud);
             }
         });
     }
@@ -137,6 +147,18 @@ public class ChatActivity extends AppCompatActivity {
         intent.putExtra(CURRENT_USER_ID, currentUserId);
         intent.putExtra(OTHER_USER_ID, otherUserId);
         return intent;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.setUserOnline(true);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.setUserOnline(false);
     }
 
 }

@@ -76,4 +76,14 @@ public class UsersViewModel  extends ViewModel {
     public void logOut() {
         auth.signOut();
     }
+
+    public void setUserOnline(boolean isOnline) {
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if (firebaseUser == null) {
+            return;
+        }
+        usersReferences.child(firebaseUser.getUid()).child("isOnline").setValue(isOnline);
+    }
+
+
 }
