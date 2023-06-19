@@ -65,7 +65,7 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-        viewModel.getUser().observe(this, new Observer<FirebaseUser>() {
+        viewModel.getUserFirebase().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser == null) {

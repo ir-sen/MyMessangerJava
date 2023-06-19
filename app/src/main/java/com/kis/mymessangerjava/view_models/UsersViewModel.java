@@ -1,5 +1,7 @@
 package com.kis.mymessangerjava.view_models;
 
+import static com.kis.mymessangerjava.Keys.KEY_REFERENCES_DB;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -17,14 +19,14 @@ import com.kis.mymessangerjava.Pojo.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersViewModel  extends ViewModel {
+public class UsersViewModel extends ViewModel {
 
     private FirebaseAuth auth;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference usersReferences;
 
-    private MutableLiveData<FirebaseUser> user = new MutableLiveData<>();
+    private MutableLiveData<FirebaseUser> userFirebase = new MutableLiveData<>();
 
     private MutableLiveData<List<User>> users = new MutableLiveData<>();
 
@@ -35,7 +37,7 @@ public class UsersViewModel  extends ViewModel {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null) {
-                    user.setValue(firebaseAuth.getCurrentUser());
+                    userFirebase.setValue(firebaseAuth.getCurrentUser());
                 }
             }
         });
@@ -52,7 +54,9 @@ public class UsersViewModel  extends ViewModel {
                 List<User> usersDB = new ArrayList<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-                    if (user == null) { return;}
+                    if (user == null) {
+                        return;
+                    }
                     if (!user.getId().equals(currentUser.getUid())) {
                         usersDB.add(user);
                     }
@@ -67,13 +71,14 @@ public class UsersViewModel  extends ViewModel {
         });
     }
 
-    public LiveData<FirebaseUser> getUser() {
-        return user;
+    public LiveData<FirebaseUser> getUserFirebase() {
+        return userFirebase;
     }
 
     public MutableLiveData<List<User>> getUsers() { return users; }
 
     public void logOut() {
+        setUserOnline(false);
         auth.signOut();
     }
 

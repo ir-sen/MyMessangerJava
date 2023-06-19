@@ -45,8 +45,6 @@ public class LoginViewModel extends ViewModel {
 
 
 
-
-
     public void login(String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
