@@ -2,6 +2,8 @@ package com.kis.mymessangerjava.view_models;
 
 import static com.kis.mymessangerjava.Keys.KEY_REFERENCES_DB;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,6 +20,7 @@ import com.kis.mymessangerjava.Pojo.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UsersViewModel extends ViewModel {
 
@@ -57,9 +60,13 @@ public class UsersViewModel extends ViewModel {
                     if (user == null) {
                         return;
                     }
-                    if (!user.getId().equals(currentUser.getUid())) {
+
+                    if (!Objects.equals(user.getId(), currentUser.getUid())) {
                         usersDB.add(user);
                     }
+
+                    Log.d("getCurrentUser", currentUser.getUid() + "-- current user");
+                    Log.d("getCurrentUser", user.getId() + "-- just user");
                 }
                 users.setValue(usersDB);
             }

@@ -31,21 +31,17 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText lastName;
     private EditText ageEt;
 
-    private ActivityRegisterBinding binding;
 
     private RegistrationViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_register);
         viewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
         registerBtn = findViewById(R.id.registerAcceptBtn);
         initViewElements();
         observeViewModel();
-        registerBtn.setOnClickListener(v -> {
-            registerUser();
-        });
+        registerBtn.setOnClickListener(v -> registerUser());
 
     }
 

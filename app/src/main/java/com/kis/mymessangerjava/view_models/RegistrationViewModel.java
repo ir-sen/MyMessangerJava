@@ -1,5 +1,7 @@
 package com.kis.mymessangerjava.view_models;
 
+import static com.kis.mymessangerjava.Keys.KEY_REFERENCES_DB;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -41,7 +43,7 @@ public class RegistrationViewModel extends ViewModel {
 
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        usersReferences = firebaseDatabase.getReference("users");
+        usersReferences = firebaseDatabase.getReference(KEY_REFERENCES_DB);
 
 
         auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {

@@ -4,14 +4,14 @@ public class User {
 
     private String id;
     private String name;
-    private String lasetName;
+    private String lastName;
     private int age;
     private Boolean isOnline;
 
-    public User(String id, String name, String lasetName, int age, Boolean isOnline) {
+    public User(String id, String name, String lastName, int age, Boolean isOnline) {
         this.id = id;
         this.name = name;
-        this.lasetName = lasetName;
+        this.lastName = lastName;
         this.age = age;
         this.isOnline = isOnline;
     }
@@ -27,8 +27,8 @@ public class User {
         this.name = name;
     }
 
-    public void setLasetName(String lasetName) {
-        this.lasetName = lasetName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setAge(int age) {
@@ -48,7 +48,7 @@ public class User {
     }
 
     public String getLastName() {
-        return lasetName;
+        return lastName;
     }
 
     public int getAge() {
@@ -64,7 +64,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", lasetName='" + lasetName + '\'' +
+                ", lasetName='" + lastName + '\'' +
                 ", age=" + age +
                 ", isOnline=" + isOnline +
                 '}';
